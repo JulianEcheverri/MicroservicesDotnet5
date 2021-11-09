@@ -11,3 +11,5 @@
 - dotnet add package Microsoft.EntityFrameworkCore.Design -v 5.0.12
 - dotnet add package Microsoft.EntityFrameworkCore.InMemory -v 5.0.12
 - dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.12
+- dotnet build
+- dotnet run

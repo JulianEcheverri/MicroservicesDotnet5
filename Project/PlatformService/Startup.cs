@@ -36,6 +36,7 @@ namespace PlatformService
             });
 
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryPlatformDb"));
+            services.AddScoped<IPlatformRepository, PlatformRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +59,8 @@ namespace PlatformService
             {
                 endpoints.MapControllers();
             });
+
+            DbSetup.DbPopulation(app);
         }
     }
 }
