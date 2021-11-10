@@ -1,2 +1,6 @@
 Project/PlatformService/bin
 Project/PlatformService/obj
+Project/CommandService/bin
+Project/CommandService/obj
+Project/PlatformService/.vscode
+Project/CommandService/.vscode
