@@ -3,6 +3,9 @@
 ## From Course
 - Les Jackson https://www.youtube.com/watch?v=DgVjEo3OGBI&t=1246s
 
+### Visual studio code
+- code -r .
+
 ### .Net 5 commands
 - dotnet --version
 - dotnet new webapi -n {name}
@@ -24,3 +27,11 @@
 - For start a container: docker start {CONTAINER ID}
 - For publish container: docker push {your docker hub id}/{image name}
 - Running service url http://localhost:8080/api/platforms/
+
+### Kubernetes
+- kubectl version
+- kubectl apply -f {.yml name file} --> kubectl apply -f platforms-depl.yaml
+- kubectl get deployments
+- kubectl get pods
+- kubectl delete deployment {name}
+- kubectl get services
