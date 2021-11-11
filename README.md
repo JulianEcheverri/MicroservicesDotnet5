@@ -42,6 +42,7 @@
 - kubectl get pods
 - kubectl delete deployment {name}
 - kubectl get services
+- To refresh image after change it on docker hub: kubectl rollout restart deployment {deploy name}
 
 #### Visual studio code
 - code -r .

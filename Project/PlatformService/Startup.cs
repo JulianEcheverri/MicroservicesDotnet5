@@ -34,6 +34,7 @@ namespace PlatformService
             services.AddScoped<IPlatformRepository, PlatformRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+            Console.WriteLine($"--> CommandService Endpoint: {Configuration["CommandService"]}");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
