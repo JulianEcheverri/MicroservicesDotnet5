@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PlatformService.Data;
+using PlatformService.SynchDataServices.Http;
 
 namespace PlatformService
 {
@@ -32,6 +33,7 @@ namespace PlatformService
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryPlatformDb"));
             services.AddScoped<IPlatformRepository, PlatformRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,12 +1,19 @@
-# Microservices .NET 5
+# Building .NET Microservices using the REST API pattern
 
 ## From Course
 - Les Jackson https://www.youtube.com/watch?v=DgVjEo3OGBI&t=1246s
 
-### Visual studio code
-- code -r .
+### Overview
+- .NET 5
+- Entity Framework Core
+- Docker
+- Kubernetes: Deploying our services to Kubernetes cluster
+- HTTP & gRPC: Building Synchronous messaging between services
+- RabbitMQ: Building Asynchronous messaging between services using an Event Bus 
+- Working with dedicated persistence layers for both services
+- Employing the API Gateway pattern to route to our services
 
-### .Net 5 commands
+#### .Net 5 commands
 - dotnet --version
 - dotnet new webapi -n {name}
 - dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
@@ -17,7 +24,7 @@
 - dotnet build
 - dotnet run
 
-### Docker help
+#### Docker help
 - Dockerize an ASP.NET Core application https://docs.docker.com/samples/dotnetcore/
 - docker --version
 - Build an image: docker build -t {your docker hub id}/{image name} . --> julianecheverri23/platformservice (dont forget the period!)
@@ -28,10 +35,13 @@
 - For publish container: docker push {your docker hub id}/{image name}
 - Running service url http://localhost:8080/api/platforms/
 
-### Kubernetes
+#### Kubernetes
 - kubectl version
 - kubectl apply -f {.yml name file} --> kubectl apply -f platforms-depl.yaml
 - kubectl get deployments
 - kubectl get pods
 - kubectl delete deployment {name}
 - kubectl get services
+
+#### Visual studio code
+- code -r .

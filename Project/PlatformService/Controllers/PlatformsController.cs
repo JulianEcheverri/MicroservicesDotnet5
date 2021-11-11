@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlatformService.Data;
 using PlatformService.Dtos;
 using PlatformService.Models;
+using PlatformService.SynchDataServices.Http;
 
 namespace PlatformService.Controllers
 {
@@ -16,11 +18,13 @@ namespace PlatformService.Controllers
     {
         private readonly IPlatformRepository _platformRepository;
         private readonly IMapper _mapper;
+        private readonly ICommandDataClient _commandDataClient;
 
-        public PlatformsController(IPlatformRepository platformRepository, IMapper mapper)
+        public PlatformsController(IPlatformRepository platformRepository, IMapper mapper, ICommandDataClient commandDataClient)
         {
             _platformRepository = platformRepository;
             _mapper = mapper;
+            _commandDataClient = commandDataClient;
         }
 
         [HttpGet]
@@ -50,7 +54,7 @@ namespace PlatformService.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<PlatformReadDto>> Post(PlatformCreateDto platformCreateDto)
+        public async Task<ActionResult<IEnumerable<PlatformReadDto>>> Post(PlatformCreateDto platformCreateDto)
         {
             try
             {
@@ -59,6 +63,9 @@ namespace PlatformService.Controllers
                 _platformRepository.SaveChanges();
 
                 var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
+
+                // Sending the platform created to command service through command data client
+                await _commandDataClient.SendPlatformToCommand(platformReadDto);
 
                 return CreatedAtAction(nameof(Post), new { Id = platformReadDto.Id, platform = platformReadDto });
             }
