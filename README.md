@@ -11,7 +11,7 @@
 - HTTP & gRPC: Building Synchronous messaging between services
 - RabbitMQ: Building Asynchronous messaging between services using an Event Bus 
 - Working with dedicated persistence layers for both services
-- Employing the API Gateway pattern to route to our services
+- NGINX Ingress Controller: Employing the API Gateway pattern to route to our services. https://github.com/kubernetes/ingress-nginx https://kubernetes.github.io/ingress-nginx/deploy/
 
 #### .Net 5 commands
 - dotnet --version
@@ -43,6 +43,12 @@
 - kubectl delete deployment {name}
 - kubectl get services
 - To refresh image after change it on docker hub: kubectl rollout restart deployment {deploy name}
+- kubectl get namespace
+
+#### Kubernetes NGINX Ingress Controller
+- kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/cloud/deploy.yaml
+- kubectl get pods --namespace=ingress-nginx
+- kubectl get services --namespace=ingress-nginx
 
 #### Visual studio code
 - code -r .
