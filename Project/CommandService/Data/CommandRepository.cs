@@ -41,7 +41,7 @@ namespace CommandService.Data
             return _appDbContext.Commands.FirstOrDefault(x => x.PlatformId == platformId && x.Id == commandId);
         }
 
-        public IEnumerable<Command> GetCommandsByPlatforms(int platformId)
+        public IEnumerable<Command> GetCommandsByPlatformId(int platformId)
         {
             return _appDbContext.Commands.Where(x => x.PlatformId == platformId).OrderBy(x => x.Platform.Name);
         }
