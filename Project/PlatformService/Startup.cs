@@ -13,12 +13,14 @@ namespace PlatformService
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public IConfiguration _configuration { get; }
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+        {
+            _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,11 +32,23 @@ namespace PlatformService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
             });
 
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryPlatformDb"));
+            if (_webHostEnvironment.IsProduction())
+            {
+                Console.WriteLine($"--> Using SQL Server DB");
+                services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("PlatformServiceConnection")));
+            }
+            else
+            {
+                Console.WriteLine($"--> Using InMemoryPlatformDb");
+                services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryPlatformDb"));
+            }
+
             services.AddScoped<IPlatformRepository, PlatformRepository>();
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
-            Console.WriteLine($"--> CommandService Endpoint: {Configuration["CommandService"]}");
+
+            Console.WriteLine($"--> CommandService Endpoint: {_configuration["CommandService"]}");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

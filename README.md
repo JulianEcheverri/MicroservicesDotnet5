@@ -44,6 +44,9 @@
 - kubectl get services
 - To refresh image after change it on docker hub: kubectl rollout restart deployment {deploy name}
 - kubectl get namespace
+- kubectl get storageclass - Creating a Presistent Volume Claim / SQL Server pod
+- kubectl get pvc
+- kubectl create secret generic mssql --from-literal=SA_PASSWORD="pa55w0rd!"
 
 #### Kubernetes NGINX Ingress Controller
 - kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/cloud/deploy.yaml
