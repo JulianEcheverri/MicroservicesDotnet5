@@ -72,7 +72,7 @@ namespace PlatformService
                 endpoints.MapControllers();
             });
 
-            DbSetup.DbPopulation(app);
+            DbSetup.DbPopulation(app, _webHostEnvironment.IsProduction());
         }
     }
 }

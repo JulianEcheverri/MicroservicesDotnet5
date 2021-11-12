@@ -23,6 +23,8 @@
 - dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.12
 - dotnet build
 - dotnet run
+- dotnet tool install --global dotnet-ef
+- dotnet ef migrations add InitialCreate
 
 #### Docker help
 - Dockerize an ASP.NET Core application https://docs.docker.com/samples/dotnetcore/
