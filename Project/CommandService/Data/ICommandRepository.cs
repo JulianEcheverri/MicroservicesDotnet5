@@ -1,0 +1,23 @@
+using System.Collections.Generic;
+using CommandService.Models;
+
+namespace CommandService.Data
+{
+    public interface ICommandRepository
+    {
+        #region Platforms
+        bool SaveChanges();
+        IEnumerable<Platform> GetAllPlatforms();
+        void CreatePlatform(Platform platform);
+        bool PlatformExists(int platformId);
+
+        #endregion Platforms
+
+        #region Commands
+        IEnumerable<Command> GetCommandsByPlatforms(int platformId);
+        Command GetCommand(int platformId, int commandId);
+        void CreateCommand(int platformId, Command command);
+
+        #endregion Commands
+    }
+}

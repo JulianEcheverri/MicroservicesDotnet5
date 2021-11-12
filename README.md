@@ -44,7 +44,7 @@
 - kubectl get pods
 - kubectl delete deployment {name}
 - kubectl get services
-- To refresh image after change it on docker hub: kubectl rollout restart deployment {deploy name}
+- kubectl rollout restart deployment {deploy name} To refresh image after change it on docker hub
 - kubectl get namespace
 - kubectl get storageclass - Creating a Presistent Volume Claim / SQL Server pod
 - kubectl get pvc
