@@ -25,6 +25,7 @@
 - dotnet run
 - dotnet tool install --global dotnet-ef
 - dotnet ef migrations add InitialCreate
+- dotnet add package RabbitMQ.Client
 
 #### Docker help
 - Dockerize an ASP.NET Core application https://docs.docker.com/samples/dotnetcore/
@@ -57,3 +58,7 @@
 
 #### Visual studio code
 - code -r .
+
+#### RabbitMQ
+- http://localhost:15672/
+- Credentials --> guest:guest
