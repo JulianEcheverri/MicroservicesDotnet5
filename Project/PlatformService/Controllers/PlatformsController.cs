@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PlatformService.AsyncDataServices;
 using PlatformService.Data;
 using PlatformService.Dtos;
 using PlatformService.Models;
@@ -19,12 +20,14 @@ namespace PlatformService.Controllers
         private readonly IPlatformRepository _platformRepository;
         private readonly IMapper _mapper;
         private readonly ICommandDataClient _commandDataClient;
+        private readonly IMessageBusClient _messageBusClient;
 
-        public PlatformsController(IPlatformRepository platformRepository, IMapper mapper, ICommandDataClient commandDataClient)
+        public PlatformsController(IPlatformRepository platformRepository, IMapper mapper, ICommandDataClient commandDataClient, IMessageBusClient messageBusClient)
         {
             _platformRepository = platformRepository;
             _mapper = mapper;
             _commandDataClient = commandDataClient;
+            _messageBusClient = messageBusClient;
         }
 
         [HttpGet]
@@ -64,14 +67,20 @@ namespace PlatformService.Controllers
 
                 var platformReadDto = _mapper.Map<PlatformReadDto>(platform);
 
-                // Sending the platform created to command service through command data client
+                // Sending Synch Message of the Platform created to command service through HTTP Command data client
                 await _commandDataClient.SendPlatformToCommand(platformReadDto);
+
+                // Sending Asynch Message of the Platform created to RabbitMQ MessageBus
+                var platformPublishedDto = _mapper.Map<PlatformPublishedDto>(platformReadDto);
+                platformPublishedDto.Event = "Platform_Published";
+
+                _messageBusClient.PublishNewPlatform(platformPublishedDto);
 
                 return CreatedAtAction(nameof(Post), new { Id = platformReadDto.Id, platform = platformReadDto });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"--> Something went wrong... ex: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
