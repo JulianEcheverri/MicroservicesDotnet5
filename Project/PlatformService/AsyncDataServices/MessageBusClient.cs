@@ -29,10 +29,10 @@ namespace PlatformService.AsyncDataServices
                 _rmqChannel = _rmqConnection.CreateModel();
                 _rmqChannel.ExchangeDeclare(exchange: "trigger", type: ExchangeType.Fanout);
 
-                // Subscribed for executing event handler function in case that the connection has shut down
+                // Subscribed for executing event handler function in case that the connection has been shut down
                 _rmqConnection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
 
-                Console.WriteLine("--> Connected to MessageBus");
+                Console.WriteLine("--> Connected to MessageBus...");
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace PlatformService.AsyncDataServices
             Console.WriteLine($"--> We have sent: {message}");
         }
 
-        public void Dipose()
+        public void Dispose()
         {
             Console.WriteLine("MessageBus Disposed");
             
