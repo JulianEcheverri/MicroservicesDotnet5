@@ -26,6 +26,11 @@
 - dotnet tool install --global dotnet-ef
 - dotnet ef migrations add InitialCreate
 - dotnet add package RabbitMQ.Client
+- dotnet add package Grpc.AspNetCore
+- dotnet add package Grpc.Tools
+- dotnet add package Grpc.Net.Client
+- dotnet add package Google.Protobuf
+- dotnet remove package {name}
 
 #### Docker help
 - Dockerize an ASP.NET Core application https://docs.docker.com/samples/dotnetcore/
