@@ -10,8 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PlatformService.AsyncDataServices;
 using PlatformService.Data;
-using PlatformService.SynchDataServices.Grpc;
-using PlatformService.SynchDataServices.Http;
+using PlatformService.SyncDataServices.Grpc;
+using PlatformService.SyncDataServices.Http;
 
 namespace PlatformService
 {

@@ -3,7 +3,7 @@ using AutoMapper;
 using Grpc.Core;
 using PlatformService.Data;
 
-namespace PlatformService.SynchDataServices.Grpc
+namespace PlatformService.SyncDataServices.Grpc
 {
     public class GrpcPlatformService : GrpcPlatform.GrpcPlatformBase
     {
