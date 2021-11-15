@@ -37,6 +37,7 @@
 - For start a container: docker start {CONTAINER ID}
 - For publish container: docker push {your docker hub id}/{image name}
 - Running service url http://localhost:8080/api/platforms/
+- docker login -u "myusername" -p "mypassword" docker.io
 
 #### Kubernetes
 - kubectl version
